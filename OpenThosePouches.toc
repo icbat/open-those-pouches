@@ -4,5 +4,8 @@
 ## Author: @icbat
 ## Version: 1
 
+# Dependencies
+libs/LibProcessable/LibProcessable.lua
+
 # This addon
 OpenThosePouches.lua
