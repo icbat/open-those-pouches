@@ -1,0 +1,8 @@
+## Interface: 90105
+## Title: Open Those Pouches
+## Notes: Automatically opens and tries to loot any backpacks, satchels, or pouches as you loot them
+## Author: @icbat
+## Version: 1
+
+# This addon
+OpenThosePouches.lua
