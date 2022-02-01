@@ -23,9 +23,8 @@ jobs:
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
-
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@master
+      with:
+        submodules: recursive
 
     - name: Create 'dist' folder
       run: mkdir ${{env.ADDON_NAME}}/
