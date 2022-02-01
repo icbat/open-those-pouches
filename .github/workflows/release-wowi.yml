@@ -4,7 +4,7 @@ env:
   # Must match the name of your TOC file for WoW to load this addon at all
   ADDON_NAME: OpenThosePouches
   # The list of what you want to ship in your ZIP file, minus the TOC which is required
-  ADDON_BUNDLE_FILES: OpenThosePouches.lua libs/* LICENSE README.md
+  ADDON_BUNDLE_FILES: OpenThosePouches.lua libs/ LICENSE README.md
   # The ID number for WoW Interface to be able to upload
   WOWI_ID: 26222
 
