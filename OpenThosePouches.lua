@@ -26,12 +26,12 @@ local function IsPouch(container, slot)
 end
 
 local function OpenNextPouch()
-    print("Looking for pouches")
+    -- print("Looking for pouches")
 
     for container = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
         for slot = 1, GetContainerNumSlots(container) do
             if IsPouch(container, slot) == true then
-                print("Opening ", itemLink)
+                -- print("Opening ", itemLink)
                 UseContainerItem(container, slot)
                 C_Timer.After(delayBetweenSearches, OpenNextPouch)
                 return
@@ -47,7 +47,7 @@ local function OpenAllPouchesEventually()
         return
     end
     isOpening_lock = true
-    print("scheduling")
+    -- print("scheduling")
     C_Timer.After(delayBetweenSearches, OpenNextPouch)
 end
 
