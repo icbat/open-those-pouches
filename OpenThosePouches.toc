@@ -1,8 +1,8 @@
-## Interface: 90105
+## Interface: 90200
 ## Title: Open Those Pouches
 ## Notes: Automatically opens and tries to loot any backpacks, satchels, or pouches as you loot them
 ## Author: @icbat
-## Version: 3
+## Version: 4
 
 # Dependencies
 libs/LibProcessable/LibProcessable.lua
