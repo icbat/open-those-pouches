@@ -3,7 +3,7 @@ local LibProcessable = LibStub("LibProcessable")
 local isOpening_lock = false -- semaphor to keep us from recursively checking
 local delayBetweenSearches = 0.75 -- seconds (not MS) to wait between bag opens
 
--- TODO does this work w/ autoloot turned off?
+-- // TODO don't try to open if you're talking to a vendor
 
 local function IsPouch(container, slot)
     local texture, count, locked, quality, readable, lootable, itemLink = GetContainerItemInfo(container, slot)
@@ -16,6 +16,12 @@ local function IsPouch(container, slot)
     end
 
     local itemId = GetContainerItemID(container, slot)
+
+    -- warped-pocket-dimension, I feel like this was made specifically to mess with me :)
+    if itemId == 190382 then
+        return false
+    end
+
     for lockedItemId, _lockpickingSkillRequired in pairs(LibProcessable.containers) do
         if lockedItemId == itemId then
             return false
