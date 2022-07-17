@@ -23,11 +23,6 @@ jobs:
         zipBall: true
         out-file-path: "libs/LibProcessable"
 
-    - name: Debugging
-      run: |
-        ls -lsa
-        ls -lsa libs/
-
     - name: Create 'dist' folder
       run: mkdir OpenThosePouches/
 
@@ -71,3 +66,5 @@ jobs:
         id: 26222
         zipFilePath: OpenThosePouches.zip
         compatible: ${{ steps.get_versions.outputs.supported_version_semantic }}
+        version: ${{ steps.get_versions.outputs.addon_version }}
+        apiKey: ${{ secrets.wowi_api_token }}
