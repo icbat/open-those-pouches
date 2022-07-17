@@ -20,7 +20,10 @@ jobs:
       with:
         repository: 'p3lim-wow/LibProcessable'
         platform: 'github'
-        path: 'libs/'
+        path: 'libs/LibProcessable'
+
+    - name: Remove Dependency Crufg
+      run: rm -r libs/LibProcessable/.git
 
     - name: Debugging
       run: |
