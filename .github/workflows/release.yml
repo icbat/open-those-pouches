@@ -3,32 +3,34 @@ name: Release new version of addon to WoW Interface
 on:
   workflow_dispatch:
     # Enables a button to manually run this against the main branch
-    branches: [ main ]
   push:
     # Enables automatic deploys off pushes/merges into the main branch
     branches: [ main ]
 
 jobs:
-  build:
+  get-deps:
+    runs-on: ubuntu-latest
     steps:
       - name: Clone Processables Lib
-        uses: GuillaumeFalourd/clone-github-repo-action@v2
+        uses: robinraju/release-downloader@v1.4
         with:
-          owner: 'p3lim-wow'
-          repository: 'LibProcessable'
+          repository: "p3lim-wow/LibProcessable"
+          latest: true
+          zipBall: true
+          out-file-path: "libs/LibProcessable"
 
-      - name: Copy Processables into Lib
+      - name: Debugging
         run: |
-          ls -lsa
-          cp -r LibProcessable libs/
-          ls -lsa
-          ls libs -lsa
+          echo "ROOT"
+          ls -la
+          echo "CLONED REPO"
+          ls -la libs
 
-      - name: Upload to WoW Interface
-        uses: icbat/wow-addon-github-workflow/.github/workflows/release-wowi.yml@main
-        with:
-          addon_name: OpenThosePouches
-          addon_bundled_files: OpenThosePouches.lua libs/ LICENSE README.md
-          wowi_id: 26222
-        secrets:
-          wowi_api_token: ${{secrets.WOWI_API_TOKEN}}
+  release:
+    uses: icbat/wow-addon-github-workflow/.github/workflows/release-wowi.yml@main
+    with:
+      addon_name: OpenThosePouches
+      addon_bundled_files: OpenThosePouches.lua libs/ LICENSE README.md
+      wowi_id: 26222
+    secrets:
+      wowi_api_token: ${{secrets.WOWI_API_TOKEN}}
