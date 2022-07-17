@@ -16,12 +16,16 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Download Processables Lib
-      uses: robinraju/release-downloader@v1.4
+      uses: sudosubin/git-clone-action@v1
       with:
-        repository: "p3lim-wow/LibProcessable"
-        latest: true
-        zipBall: true
-        out-file-path: "libs/LibProcessable"
+        repository: 'p3lim-wow/LibProcessable'
+        platform: 'github'
+        path: 'libs/'
+
+    - name: Debugging
+      run: |
+        ls -lsa
+        ls -lsa libs/
 
     - name: Create 'dist' folder
       run: mkdir OpenThosePouches/
