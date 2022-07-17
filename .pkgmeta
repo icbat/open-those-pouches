@@ -1,4 +1,0 @@
-externals:
-  libs/LibProcessable:
-    url: git://github.com/p3lim-wow/LibProcessable
-    tag: latest
