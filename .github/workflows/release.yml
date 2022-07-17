@@ -8,29 +8,66 @@ on:
     branches: [ main ]
 
 jobs:
-  get-deps:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Clone Processables Lib
-        uses: robinraju/release-downloader@v1.4
-        with:
-          repository: "p3lim-wow/LibProcessable"
-          latest: true
-          zipBall: true
-          out-file-path: "libs/LibProcessable"
+    - name: Checkout the code
+      uses: actions/checkout@v2
 
-      - name: Debugging
-        run: |
-          echo "ROOT"
-          ls -la
-          echo "CLONED REPO"
-          ls -la libs
+    - name: Download Processables Lib
+      uses: robinraju/release-downloader@v1.4
+      with:
+        repository: "p3lim-wow/LibProcessable"
+        latest: true
+        zipBall: true
+        out-file-path: "libs/LibProcessable"
 
-  release:
-    uses: icbat/wow-addon-github-workflow/.github/workflows/release-wowi.yml@main
-    with:
-      addon_name: OpenThosePouches
-      addon_bundled_files: OpenThosePouches.lua libs/ LICENSE README.md
-      wowi_id: 26222
-    secrets:
-      wowi_api_token: ${{secrets.WOWI_API_TOKEN}}
+    - name: Debugging
+      run: |
+        ls -lsa
+        ls -lsa libs/
+
+    - name: Create 'dist' folder
+      run: mkdir OpenThosePouches/
+
+    - name: Put everything into a folder called OpenThosePouches
+      run: cp -r OpenThosePouches.lua libs/ LICENSE README.md OpenThosePouches.toc OpenThosePouches/
+
+    - name: Zip it good
+      run: zip -9 -r OpenThosePouches.zip  OpenThosePouches/
+
+    - name: Parse WoW Addon Verions
+      id: get_versions
+      uses: icbat/parse-wow-addon-version@v1.1.0
+      with:
+        tocfile: OpenThosePouches.toc
+
+    - name: Create GH Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_versions.outputs.addon_version }}
+        release_name: Release ${{ steps.get_versions.outputs.addon_version }}
+        draft: false
+        prerelease: false
+
+    - name: Upload GH Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./OpenThosePouches.zip
+        asset_name: OpenThosePouches.zip
+        asset_content_type: application/zip
+
+    - name: Upload to WoW Interface
+      uses: icbat/wow-addon-upload-action@v1.0.3
+      with:
+        id: 26222
+        zipFilePath: OpenThosePouches.zip
+        compatible: ${{ steps.get_versions.outputs.supported_version_semantic }}
