@@ -23,7 +23,7 @@ jobs:
         path: 'libs/LibProcessable'
 
     - name: Remove Dependency Crufg
-      run: rm -r libs/LibProcessable/.git
+      run: rm -r libs/LibProcessable/.git libs/LibProcessable/.github
 
     - name: Debugging
       run: |
