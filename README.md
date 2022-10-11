@@ -5,10 +5,6 @@ A WoW addon for automatically opening any loot pouches you acquire when you get 
 
 Get it on [WoW Interface](https://www.wowinterface.com/downloads/info26222-OpenThosePouches.html), or use the [Cursebreaker tool](https://github.com/AcidWeb/CurseBreaker) (recommended)
 
-## Dependencies
-
-This uses [LibProcessable](https://github.com/p3lim-wow/LibProcessable) to figure out if something is a locked chest. It's imported as a submodule, so should only need to be updated when new locked chests are added.
-
 ## Contributing
 
 1. Check that there's not already [an issue](https://github.com/icbat/open-those-pouches/issues) describing what you're doing

@@ -1,9 +1,54 @@
-local LibProcessable = LibStub("LibProcessable")
-
 local isOpening_lock = false -- semaphor to keep us from recursively checking
 local delayBetweenSearches = 0.75 -- seconds (not MS) to wait between bag opens
 
--- // TODO don't try to open if you're talking to a vendor
+-- // TODO don't try to open if you're talking to a vendora4
+
+local ignoredItems = {
+    190382, -- warped-pocket-dimension, I feel like this was made specifically to mess with me :)
+
+    -- Items requiring lockpicking
+    -- https://www.wowhead.com/items?filter=10:195;1:2;:0
+    7209, -- Tazan's Satchel
+    4632, -- Ornate Bronze Lockbox
+    4633, -- Heavy Bronze Lockbox
+    4634, -- Iron Lockbox
+    4636, -- Strong Iron Lockbox
+    4637, -- Steel Lockbox
+    4638, -- Reinforced Steel Lockbox
+    5758, -- Mithril Lockbox
+    5759, -- Thorium Lockbox
+    5760, -- Eternium Lockbox
+    6354, -- Small Locked Chest
+    6355, -- Sturdy Locked Chest
+    12033, -- Thaurissan Family Jewels
+    13875, -- Ironbound Locked Chest
+    13918, -- Reinforced Locked Chest
+    16882, -- Battered Junkbox
+    16883, -- Worn Junkbox
+    16884, -- Sturdy Junkbox
+    16885, -- Heavy Junk    box
+    106895, -- Iron-Bound Junkbox
+    29569, -- Strong Junkbox
+    31952, -- Khorium Lockbox
+    43575, -- Reinforced Junkbox
+    43622, -- Froststeel Lockbox
+    43624, -- Titanium Lockbox
+    45986, -- Tiny Titanium Lockbox
+    63349, -- Flame-Scarred Junkbox
+    68729, -- Elementium Lockbox
+    88165, -- Vine-Cracked Junkbox
+    88567, -- Ghost Iron Lockbox
+    116920, -- True Steel Lockbox
+    121331, -- Leystone Lockbox
+    169475, -- Barnacled Lockbox
+    179311, -- Synvir Lockbox
+    180522, -- Phaedrum Lockbox
+    180532, -- Oxxein Lockbox
+    180533, -- Solenium Lockbox
+    186161, -- Stygian Lockbox
+    186160, -- Locked Artifact Case
+    188787 -- Locked Broker Luggage
+}
 
 local function IsPouch(container, slot)
     local texture, count, locked, quality, readable, lootable, itemLink = GetContainerItemInfo(container, slot)
@@ -17,12 +62,7 @@ local function IsPouch(container, slot)
 
     local itemId = GetContainerItemID(container, slot)
 
-    -- warped-pocket-dimension, I feel like this was made specifically to mess with me :)
-    if itemId == 190382 then
-        return false
-    end
-
-    for lockedItemId, _lockpickingSkillRequired in pairs(LibProcessable.containers) do
+    for _i, lockedItemId in ipairs(ignoredItems) do
         if lockedItemId == itemId then
             return false
         end

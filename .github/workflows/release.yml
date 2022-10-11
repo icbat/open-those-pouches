@@ -15,26 +15,11 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@v2
 
-    - name: Download Processables Lib
-      uses: sudosubin/git-clone-action@v1.0.1
-      with:
-        repository: 'p3lim-wow/LibProcessable'
-        platform: 'github'
-        path: 'libs/LibProcessable'
-
-    - name: Remove Dependency Crufg
-      run: rm -r libs/LibProcessable/.git libs/LibProcessable/.github
-
-    - name: Debugging
-      run: |
-        ls -lsa
-        ls -lsa libs/
-
     - name: Create 'dist' folder
       run: mkdir OpenThosePouches/
 
     - name: Put everything into a folder called OpenThosePouches
-      run: cp -r OpenThosePouches.lua libs/ LICENSE README.md OpenThosePouches.toc OpenThosePouches/
+      run: cp -r OpenThosePouches.lua LICENSE README.md OpenThosePouches.toc OpenThosePouches/
 
     - name: Zip it good
       run: zip -9 -r OpenThosePouches.zip  OpenThosePouches/
