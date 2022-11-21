@@ -1,7 +1,6 @@
 local isOpening_lock = false -- semaphor to keep us from recursively checking
+local isVendorDialogOpen_lock = false -- semaphor to not attempt while talking to a vendor (tries to sell the pouch)
 local delayBetweenSearches = 0.75 -- seconds (not MS) to wait between bag opens
-
--- // TODO don't try to open if you're talking to a vendora4
 
 local ignoredItems = {
     190382, -- warped-pocket-dimension, I feel like this was made specifically to mess with me :)
@@ -89,6 +88,9 @@ local function OpenNextPouch()
 end
 
 local function OpenAllPouchesEventually()
+    if isVendorDialogOpen_lock == true then
+        return
+    end
     if isOpening_lock == true then
         return
     end
@@ -101,3 +103,18 @@ end
 local f = CreateFrame("frame")
 f:SetScript("OnEvent", OpenAllPouchesEventually)
 f:RegisterEvent("ITEM_PUSH")
+
+local function ToggleVendorLock(_, event_name)
+    if event_name == "MERCHANT_SHOW" then
+        isVendorDialogOpen_lock = true
+    end
+
+    if event_name == "MERCHANT_CLOSED" then
+        isVendorDialogOpen_lock = false
+    end
+end
+
+local g = CreateFrame("frame")
+g:SetScript("OnEvent", ToggleVendorLock)
+g:RegisterEvent("MERCHANT_SHOW")
+g:RegisterEvent("MERCHANT_CLOSED")
