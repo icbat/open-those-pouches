@@ -74,7 +74,7 @@ local function OpenNextPouch()
     for container = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
         for slot = 1, C_Container.GetContainerNumSlots(container) do
             if IsPouch(container, slot) == true then
-                UseContainerItem(container, slot)
+                C_Container.UseContainerItem(container, slot)
                 C_Timer.After(delayBetweenSearches, OpenNextPouch)
                 return
             end
