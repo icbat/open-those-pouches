@@ -50,19 +50,17 @@ local ignoredItems = {
 }
 
 local function IsPouch(container, slot)
-    local texture, count, locked, quality, readable, lootable, itemLink = GetContainerItemInfo(container, slot)
-    if itemLink == nil then
+    local itemInfo = C_Container.GetContainerItemInfo(container, slot)
+    if itemInfo == nil then
         return false
     end
 
-    if lootable == false then
+    if itemInfo["hasLoot"] == false then
         return false
     end
-
-    local itemId = GetContainerItemID(container, slot)
 
     for _i, lockedItemId in ipairs(ignoredItems) do
-        if lockedItemId == itemId then
+        if lockedItemId == itemInfo["itemID"] then
             return false
         end
     end
@@ -74,9 +72,8 @@ local function OpenNextPouch()
     -- print("Looking for pouches")
 
     for container = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
-        for slot = 1, GetContainerNumSlots(container) do
+        for slot = 1, C_Container.GetContainerNumSlots(container) do
             if IsPouch(container, slot) == true then
-                -- print("Opening ", itemLink)
                 UseContainerItem(container, slot)
                 C_Timer.After(delayBetweenSearches, OpenNextPouch)
                 return
