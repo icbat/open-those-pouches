@@ -2,7 +2,7 @@
 ## Title: Open Those Pouches
 ## Notes: Automatically opens and tries to loot any backpacks, satchels, or pouches as you loot them
 ## Author: @icbat
-## Version: 11
+## Version: 12
 
 ## X-WoWI-ID: 26222
 

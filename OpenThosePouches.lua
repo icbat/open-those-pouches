@@ -74,7 +74,9 @@ local function OpenNextPouch()
     for container = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
         for slot = 1, C_Container.GetContainerNumSlots(container) do
             if IsPouch(container, slot) == true then
-                C_Container.UseContainerItem(container, slot)
+                if isVendorDialogOpen_lock == false then
+                    C_Container.UseContainerItem(container, slot)
+                end
                 C_Timer.After(delayBetweenSearches, OpenNextPouch)
                 return
             end
@@ -85,9 +87,7 @@ local function OpenNextPouch()
 end
 
 local function OpenAllPouchesEventually()
-    if isVendorDialogOpen_lock == true then
-        return
-    end
+
     if isOpening_lock == true then
         return
     end
