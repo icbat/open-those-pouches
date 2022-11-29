@@ -46,7 +46,8 @@ local ignoredItems = {
     180533, -- Solenium Lockbox
     186161, -- Stygian Lockbox
     186160, -- Locked Artifact Case
-    188787 -- Locked Broker Luggage
+    188787, -- Locked Broker Luggage
+    190954, -- Serevite Lockbox
 }
 
 local function IsPouch(container, slot)
