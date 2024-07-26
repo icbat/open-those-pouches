@@ -3,51 +3,66 @@ local isVendorDialogOpen_lock = false -- semaphor to not attempt while talking t
 local delayBetweenSearches = 0.75 -- seconds (not MS) to wait between bag opens
 
 local ignoredItems = {
-    190382, -- warped-pocket-dimension, I feel like this was made specifically to mess with me :)
+    -- warped-pocket-dimension, I feel like this was made specifically to mess with me :)
+    190382, 
+
+    -- Encaged souls from the Zapthrottle Soul Inhaler
+    200931,
+    200932,
+    200934,
+    200936,
 
     -- Items requiring lockpicking
+    -- Last updated for 11.0
     -- https://www.wowhead.com/items?filter=10:195;1:2;:0
-    7209, -- Tazan's Satchel
-    4632, -- Ornate Bronze Lockbox
-    4633, -- Heavy Bronze Lockbox
-    4634, -- Iron Lockbox
-    4636, -- Strong Iron Lockbox
-    4637, -- Steel Lockbox
-    4638, -- Reinforced Steel Lockbox
-    5758, -- Mithril Lockbox
-    5759, -- Thorium Lockbox
-    5760, -- Eternium Lockbox
-    6354, -- Small Locked Chest
-    6355, -- Sturdy Locked Chest
-    12033, -- Thaurissan Family Jewels
-    13875, -- Ironbound Locked Chest
-    13918, -- Reinforced Locked Chest
-    16882, -- Battered Junkbox
-    16883, -- Worn Junkbox
-    16884, -- Sturdy Junkbox
-    16885, -- Heavy Junk    box
-    106895, -- Iron-Bound Junkbox
-    29569, -- Strong Junkbox
-    31952, -- Khorium Lockbox
-    43575, -- Reinforced Junkbox
-    43622, -- Froststeel Lockbox
-    43624, -- Titanium Lockbox
-    45986, -- Tiny Titanium Lockbox
-    63349, -- Flame-Scarred Junkbox
-    68729, -- Elementium Lockbox
-    88165, -- Vine-Cracked Junkbox
-    88567, -- Ghost Iron Lockbox
-    116920, -- True Steel Lockbox
-    121331, -- Leystone Lockbox
-    169475, -- Barnacled Lockbox
-    179311, -- Synvir Lockbox
-    180522, -- Phaedrum Lockbox
-    180532, -- Oxxein Lockbox
-    180533, -- Solenium Lockbox
-    186161, -- Stygian Lockbox
-    186160, -- Locked Artifact Case
-    188787, -- Locked Broker Luggage
-    190954, -- Serevite Lockbox
+    -- use the Copy icon for ID
+    16885, 
+    63349, 
+    68729, 
+    203743, 
+    198657, 
+    186161, 
+    180532, 
+    190954, 
+    179311, 
+    5760, 
+    43575, 
+    16884, 
+    4636, 
+    180522, 
+    29569, 
+    31952, 
+    180533, 
+    88165, 
+    4634, 
+    16882, 
+    43624, 
+    12033, 
+    16883, 
+    88567, 
+    5758, 
+    43622, 
+    121331, 
+    4638, 
+    5759, 
+    4637, 
+    169475, 
+    7209, 
+    6354, 
+    45986, 
+    4632, 
+    13918, 
+    116920, 
+    4633, 
+    188787, 
+    6355, 
+    194037, 
+    13875, 
+    186160, 
+    204307, 
+    220376, 
+    106895, 
+    191296
 }
 
 local function IsPouch(container, slot)

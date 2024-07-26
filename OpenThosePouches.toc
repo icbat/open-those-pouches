@@ -1,8 +1,10 @@
-## Interface: 100002
+# /run print((select(4, GetBuildInfo())))
+## Interface: 110000
 ## Title: Open Those Pouches
 ## Notes: Automatically opens and tries to loot any backpacks, satchels, or pouches as you loot them
 ## Author: @icbat
-## Version: 14
+## Version: 15
+## IconTexture: Interface/Addons/OpenThosePouches/ick-logo
 
 ## X-WoWI-ID: 26222
 
