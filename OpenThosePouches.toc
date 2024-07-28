@@ -3,9 +3,11 @@
 ## Title: Open Those Pouches
 ## Notes: Automatically opens and tries to loot any backpacks, satchels, or pouches as you loot them
 ## Author: @icbat
-## Version: 15
 ## IconTexture: Interface/Addons/OpenThosePouches/ick-logo
 
+### BigWigs Packager Fields
+## Version: @project-version@
+## X-Wago-ID: kGr03g6y
 ## X-WoWI-ID: 26222
 
 # This addon
