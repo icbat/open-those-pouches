@@ -90,7 +90,8 @@ local function OpenNextPouch()
     for container = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
         for slot = 1, C_Container.GetContainerNumSlots(container) do
             if IsPouch(container, slot) == true then
-                if isVendorDialogOpen_lock == false then
+                local isNotCasting = UnitCastingInfo("player") == nil
+                if isVendorDialogOpen_lock == false and isNotCasting and not InCombatLockdown() then
                     C_Container.UseContainerItem(container, slot)
                 end
                 C_Timer.After(delayBetweenSearches, OpenNextPouch)
