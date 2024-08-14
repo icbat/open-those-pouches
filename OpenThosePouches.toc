@@ -1,5 +1,5 @@
 # /run print((select(4, GetBuildInfo())))
-## Interface: 110000
+## Interface: 110002
 ## Title: Open Those Pouches
 ## Notes: Automatically opens and tries to loot any backpacks, satchels, or pouches as you loot them
 ## Author: @icbat
