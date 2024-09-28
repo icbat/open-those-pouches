@@ -81,6 +81,12 @@ local function IsPouch(container, slot)
         end
     end
 
+    local link = C_Container.GetContainerItemLink(container, slot)
+    local _, _, _, _, itemMinLevel = C_Item.GetItemInfo(link)
+    if itemMinLevel ~= nil and itemMinLevel > UnitLevel("player") then
+        return false
+    end
+
     return true
 end
 
