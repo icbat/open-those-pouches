@@ -1,5 +1,6 @@
-# /run print((select(4, GetBuildInfo())))
 ## Interface: 120007
+# run to get version: /run print((select(4, GetBuildInfo())))
+
 ## Title: Open Those Pouches
 ## Notes: Automatically opens and tries to loot any backpacks, satchels, or pouches as you loot them
 ## Author: @icbat

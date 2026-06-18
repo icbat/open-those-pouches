@@ -123,7 +123,7 @@ end
 -- invisible frame for hooking events
 local f = CreateFrame("frame")
 f:SetScript("OnEvent", OpenAllPouchesEventually)
-f:RegisterEvent("ITEM_PUSH")
+f:RegisterEvent("BAG_UPDATE_DELAYED")
 
 local function ToggleVendorLock(_, event_name)
     if event_name == "MERCHANT_SHOW" then
