@@ -3,6 +3,9 @@ local isVendorDialogOpen_lock = false -- semaphor to not attempt while talking t
 local delayBetweenSearches = 0.75 -- seconds (not MS) to wait between bag opens
 
 local ignoredItems = {
+    -- satchel of chilled goods, good to keep around for now to cheese mount if possible
+    117394,
+
     -- warped-pocket-dimension, I feel like this was made specifically to mess with me :)
     190382, 
 
